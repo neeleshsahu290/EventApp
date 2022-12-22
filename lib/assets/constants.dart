@@ -1,6 +1,24 @@
 
 
 
+class Constant {
+  static const String baseUrl = "http://103.87.173.108:8002/api/";
+  static const String deviceToken = "device_token";
+  static const String authToken = "auth_token";
+  static const String loginStatus = "login_status";
+  static const String userId = "Id";
+  static const String userProfileData = "user_profile_data";
+  static const String termsAndConditions = "https://yellowsquash.in/terms-and-conditions/";
+  static const success = "success";
+  static const failure = "failure";
+  static const error = "error";
+  static const unauthorized = "unauthorized";
+  static const failureMessage = "Something went wrong, Please try again";
+}
+
+
+
+
 ///Login constants*//*
 const String KEY_LOGIN='Login';
 const String KEY_LOGOUT='Logout';

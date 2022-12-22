@@ -1,12 +1,12 @@
 
 
-import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterpoject/Screens/LoginScreen.dart';
 import 'package:flutterpoject/Screens/UpdateEventScreen.dart';
 import 'package:flutterpoject/assets/constants.dart' as Constants;
 import 'package:flutterpoject/res/Colors.dart';
@@ -101,14 +101,31 @@ void initState() {
             ListTile(
               title: const Text('Logout'),
               onTap: () async {
-                await FirebaseAuth.instance.signOut();
 
 
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                } else {
-                  SystemNavigator.pop();
-                }
+
+                AlertDialog(
+                  title: const Text('Logout User'),
+                  content: const Text('Are you sure do you really want to logout?'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () async{
+                        await FirebaseAuth.instance.signOut();
+
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                                (Route<dynamic> route) => false);
+                },
+                      child: const Text('Logout'),
+                    ),
+                  ],
+                );
+
                 // Update the state of the app.
                 // ...
               },
@@ -272,16 +289,15 @@ void initState() {
                                       padding: EdgeInsets.zero,
                                       icon: Icon(Icons.more_horiz),
                                       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                                        PopupMenuItem(child: InkWell(onTap:(){
+                                        PopupMenuItem(onTap: (){
                                           Navigator.push(
                                               context, MaterialPageRoute(builder: (context) => UpdateEventScreen(event, document.id)));
-
-                                        },child: Text('Update'))),
-                                        PopupMenuItem(child: InkWell(onTap: () async{
+                                        },child: Text('Update')),
+                                        PopupMenuItem(onTap: () async{
                                           await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
                                             await myTransaction.delete(document.reference);
                                           });
-                                        },child: Text('Delete'))),
+                                        },child: Text('Delete')),
                                       ],
                                     ),
                                   ),

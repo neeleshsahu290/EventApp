@@ -9,7 +9,7 @@ void snackBarMsg(String msg,BuildContext context) {
 }
 void noInternetSnackbar(BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(backgroundColor: Colors.redAccent,content: Text('No Internet Found')),
+    const SnackBar(backgroundColor: Colors.redAccent,content: Text('No Internet Found')),
   );
 }
 

@@ -241,8 +241,10 @@ class LoginState  extends  State<LoginScreen>{
             email: email.trim(),
             password: password.trim()
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => const HomeScreen()));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+                builder: (context) => HomeScreen()),
+                (Route<dynamic> route) => false);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           snackBarMsg("User doesn't exist", context);

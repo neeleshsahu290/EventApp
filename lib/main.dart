@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: AppColors().colorTheme,
+        primarySwatch:AppColor.colorPrimaryAccent,
           textTheme: const TextTheme(
             bodyText1: TextStyle(color: Colors.black),
             bodyText2: TextStyle(color: Colors.black),
@@ -60,15 +60,9 @@ class SplashScreenState extends State<SplashScreen>{
 
   @override
   void initState() {
-   /* Future.delayed(Duration(milliseconds: 300),() {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder:
-              (context) =>MainPage()
-          )
-      );
-    });*/
-    Timer(Duration(seconds: 3),
-            ()=> Navigator.pushReplacement(context,
+
+    Timer(const Duration(seconds: 3),
+            ()=> Navigator.push(context,
           MaterialPageRoute(builder:
               (context) =>MainPage()
           )
@@ -99,7 +93,7 @@ class MainPage extends StatelessWidget{
         builder: (context,snapshot){
       if(snapshot.hasData){
 
-        return  HomeScreen();
+        return  const HomeScreen();
       }else{
         return LoginScreen();
       }

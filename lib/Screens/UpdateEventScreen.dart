@@ -95,7 +95,7 @@ Event event;
                 children: [
                   Container(height: 70.0, width: 70.0,decoration: BoxDecoration(border: Border.all(width: 1.0,color: AppColors().colorTextFieldUnderline),
 
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                           Radius.circular(35.0))),
                     child: dropdownValue.icon,
                   ),
@@ -108,8 +108,8 @@ Event event;
                   timeWidget(context),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: isLoading?CircularProgressIndicator():ElevatedButton(
-                      style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 45),primary: AppColors().colorWhite),
+                    child: isLoading?const CircularProgressIndicator():ElevatedButton(
+                      style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 45),primary: AppColors().colorWhite),
                       onPressed: () async {
                         title = _controllerTitle.text;
                         place= _controllerPlace.text;
@@ -121,7 +121,7 @@ Event event;
                           await saveEvent();
                         }
                       },
-                      child:  Text('Create Event',style: TextStyle(color: AppColors().colorTextDark)),
+                      child:  Text('Update Event',style: TextStyle(color: AppColors().colorTextDark)),
 
                     ),
                   ),
@@ -186,7 +186,7 @@ Event event;
               style: TextStyle(color: textColor),
             ),
              Padding(
-              padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
               child: Divider(
                 color: AppColors().colorTextFieldUnderline,
                 thickness: 0.5,
@@ -202,7 +202,7 @@ Event event;
     return TextButton(
       style:    TextButton.styleFrom(
         minimumSize: Size.zero, // Set this
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0), // and this
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0), // and this
       ),
         onPressed: () async {
           final date = await pickDate();
@@ -224,7 +224,7 @@ Event event;
               ),
             ),
            Padding(
-            padding:  EdgeInsets.fromLTRB(0, 2, 0, 0),
+            padding:  const EdgeInsets.fromLTRB(0, 2, 0, 0),
             child: Divider(color: AppColors().colorTextFieldUnderline, thickness: 0.5,),
           )
         ])
@@ -326,7 +326,7 @@ Event event;
         setState(() {
           isLoading = true;
         });
-        snackBarMsg("Successfully Created Event", context);
+        snackBarMsg("Successfully Updated Event", context);
         finishCurrentView(context);
       }).onError((error, stackTrace) {
         snackBarMsg(error.toString(), context);
