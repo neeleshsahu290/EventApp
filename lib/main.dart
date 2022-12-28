@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutterpoject/Screens/LoginScreen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutterpoject/helper/navigator_help.dart';
 import 'package:flutterpoject/res/Colors.dart';
-import 'Screens/HomeScreen.dart';
+import 'package:flutterpoject/screens/home/ui/home_screen.dart';
+import 'package:flutterpoject/screens/login.ui/login_screen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'firebase_options.dart';
 
 void main()   async {
@@ -13,7 +16,11 @@ void main()   async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()))
+
+
+
+  ;
 }
 
 class MyApp extends StatelessWidget {
@@ -22,31 +29,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ResponsiveSizer(
+        builder: ((context, orientation, screenType) =>MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch:AppColor.colorPrimaryAccent,
-          textTheme: const TextTheme(
-            bodyText1: TextStyle(color: Colors.black),
-            bodyText2: TextStyle(color: Colors.black),
-            button: TextStyle(color: Colors.black),
-            caption: TextStyle(color: Colors.black),
-            subtitle1: TextStyle(color: Colors.black), // <-- that's the one
-            headline1: TextStyle(color: Colors.black),
-            headline2: TextStyle(color: Colors.black),
-            headline3: TextStyle(color: Colors.black),
-            headline4: TextStyle(color: Colors.black),
-            headline5: TextStyle(color: Colors.black),
-            headline6: TextStyle(color: Colors.black),
-          ),
-          /*inputDecorationTheme: InputDecorationTheme(
-            fillColor: Colors.orange,
-            filled: true,
-          )*/
       ),
-      home: SplashScreen(),
-    );
+      home: SplashScreen()
+    )));
   }
 }
 
@@ -62,11 +53,12 @@ class SplashScreenState extends State<SplashScreen>{
   void initState() {
 
     Timer(const Duration(seconds: 3),
-            ()=> Navigator.push(context,
-          MaterialPageRoute(builder:
-              (context) =>MainPage()
-          )
-      )
+            ()=>navigatorPushReplace(context, MainPage())
+      //           Navigator.push(context,
+      //     MaterialPageRoute(builder:
+      //         (context) =>MainPage()
+      //     )
+      // )
     );
   }
 
@@ -92,8 +84,9 @@ class MainPage extends StatelessWidget{
     return StreamBuilder<User?>( stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context,snapshot){
       if(snapshot.hasData){
+        return HomeScreen();
 
-        return  const HomeScreen();
+       // return  const HomeScreen();
       }else{
         return LoginScreen();
       }

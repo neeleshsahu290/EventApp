@@ -26,6 +26,10 @@ class AppColor {
   static const textRedColor = Color(0xffCC3D36);
   static const commonTextGreyColor = Color(0xFF7C7B7B);
   static const Color commonTextColor = Color(0xFF4D4D4D);
+  static const Color appBarColor= Color(0xff006f8d);
+  static const Color colorBackground= Color(0xfff3f2f2);
+  static const Color commonTextWhiteColor = Color(0xFFF3F1F1);
+
 
 
   static const Color darkGrey = Color.fromARGB(255, 86, 86, 87);
